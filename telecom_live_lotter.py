@@ -263,8 +263,7 @@ def main(phone, password):
 if __name__ == '__main__':
     phone = get_environ("TELECOM_PHONE")
     password = get_environ("TELECOM_PASSWORD")
-    #phone = ''
-    #password = ''
+
     if phone == "" or password == "":
         print("未填写相应变量 退出")
         exit(0)

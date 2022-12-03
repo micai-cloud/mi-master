@@ -25,7 +25,7 @@ from asyncio import wait, sleep, run
 import requests
 from tools.tool import timestamp, get_environ, print_now
 from tools.send_msg import push
-from china_telecom import ChinaTelecom
+from china_telecombak import ChinaTelecom
 
 class TelecomLotter:
     def __init__(self, phone, password):
@@ -263,8 +263,7 @@ def main(phone, password):
 if __name__ == '__main__':
     phone = get_environ("TELECOM_PHONE1")
     password = get_environ("TELECOM_PASSWORD1")
-    #phone = ''
-    #password = ''
+
     if phone == "" or password == "":
         print("未填写相应变量 退出")
         exit(0)
