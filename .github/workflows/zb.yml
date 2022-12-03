@@ -1,4 +1,4 @@
-name: xuexi
+name: zb
 on:
   workflow_dispatch:
     schedule:

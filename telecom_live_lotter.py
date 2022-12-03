@@ -256,10 +256,10 @@ def main(phone, password):
         TelecomLotter(phone, password).find_price()
 
 if __name__ == '__main__':
-    #phone = get_environ("TELECOM_PHONE")
-    #password = get_environ("TELECOM_PASSWORD")
-    phone = '13315392230'
-    password = '124213'
+    phone = get_environ("TELECOM_PHONE")
+    password = get_environ("TELECOM_PASSWORD")
+    #phone = ''
+    #password = ''
     if phone == "" or password == "":
         print("未填写相应变量 退出")
         exit(0)

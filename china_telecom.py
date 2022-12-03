@@ -52,7 +52,8 @@ class ChinaTelecom:
         self.headers = {
             "Host": "wapside.189.cn:9001",
             "Referer": "https://wapside.189.cn:9001/resources/dist/signInActivity.html",
-            "User-Agent": self.ua
+            "User-Agent": self.ua,
+
         }
         self.key = "-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+ugG5A8cZ3FqUKDwM57GM4io6\nJGcStivT8UdGt67PEOihLZTw3P7371+N47PrmsCpnTRzbTgcupKtUv8ImZalYk65\ndU8rjC/ridwhw9ffW2LBwvkEnDkkKKRi2liWIItDftJVBiWOh17o6gfbPoNrWORc\nAdcbpk2L+udld5kZNwIDAQAB\n-----END PUBLIC KEY-----"
 
@@ -241,24 +242,27 @@ class ChinaTelecom:
         }
         data = post(url, headers=self.headers_live, json=data).json()
         self.authorization = f"Bearer {data['data']['token']}"
+        print(self.authorization )
         self.headers_live["Authorization"] = self.authorization
     def get_usercode(self):
         """
         授权星播客登录获取 usercode
         :return:
         """
-        url = f"https://xbk.189.cn/xbkapi/api/auth/jump?userID={self.ticket}&version=9.3.3&type=room&l=renwu"
+        url = f"https://xbk.189.cn/xbkapi/api/auth/jump?userID={self.ticket}&version=10.0.0&type=room"
         self.headers_live = {
             "User-Agent": self.ua,
             "Host": "xbk.189.cn",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "Accept-Language": "zh-CN,zh-Hans;q=0.9"
-        }
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+            "Accept-Language": "zh-CN,zh-Hans;q=0.9",
+            }
+        print(self.headers_live)
         print(url)
         location = get(url, headers=self.headers_live, allow_redirects=False).headers["location"]
         print(findall(r"usercode=(.*?)&", location))
         usercode = findall(r"usercode=(.*?)&", location)[0]
         self.usercode = usercode
+        print(usercode)
     def watch_video(self):
         """
         看视频 一天可完成6次
@@ -403,8 +407,8 @@ class ChinaTelecom:
 if __name__ == "__main__":
     phone = get_environ("TELECOM_PHONE")
     password = get_environ("TELECOM_PASSWORD")
-
-
+    #phone = ''
+    #password = ''
     foods = int(float(get_environ("TELECOM_FOOD", 0, False)))
     if phone == "":
         exit(0)
