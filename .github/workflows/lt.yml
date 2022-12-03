@@ -1,0 +1,28 @@
+name: lt
+on:
+  workflow_dispatch:
+    schedule:
+      - cron: '0 */12 * * *'
+
+    watch:
+      types: [ started ]
+jobs:
+   build:
+       runs-on: windows-latest
+       steps:
+          - uses: actions/checkout@v2
+
+          - name: Set up Python 3.7
+            uses: actions/setup-python@v2
+            with:
+                python-version: 3.7
+          - name: install pip packages
+            run: python -m pip install --upgrade pip
+          - name: install pycryptodome
+            run: pip install pycryptodome
+          - name: install requests
+            run: pip install requests
+          - name: china_uni
+            run: python china_uni.py
+            env:
+              PHONE_NUM: ${{ secrets.PHONE_NUM }}
