@@ -119,7 +119,7 @@ class China_Unicom:
 
     def read_novel(self):
         self.print_now("正在执行观看150次小说, 此过程较久, 最大时长为150 * 8s = 20min")
-        for i in range(1):
+        for i in range(150):
             date = datetime.today().__format__("%Y%m%d%H%M%S")
             chapterAllIndex = randint(100000000, 999999999)
             cntIndex = randint(1000000, 9999999)
@@ -208,7 +208,9 @@ class China_Unicom:
 if __name__ == "__main__":
     """读取环境变量"""
     phone_num = get_environ("PHONE_NUM")
+
     unicom_lotter = environ.get("UNICOM_LOTTER") if environ.get("UNICOM_LOTTER") else True
     if phone_num == "":
         exit(0)
     China_Unicom(phone_num).main()
+#phone_num = '13173218252'

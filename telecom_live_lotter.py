@@ -183,24 +183,24 @@ def  attainlive(i):
     }
     data = get(url, headers=headers).json()["data"]
     return data
-def ref(liveId, period,ua,authorization):
+def ref(liveId, period,ua,authorization,phone):
 
     url = 'https://xbk.189.cn/xbkapi/api/room/index/reserve'
     headers = {
-        "User-Agent": ua,
+        "User-Agent": 'CtClient;10.0.0;Android;10;ASK-AL00x;MzkyMjMw!#!MTMzMTU',
         "authorization": authorization,
 
     }
-    da = {"liveId": liveId, "period": period, "account": "13315392230", "khd": 1}
+    da = {"liveId": liveId, "period": period, "account": phone, "khd": 1}
     print(requests.post(url, headers=headers, data=da).text)
 def reward(liveId,period,ua,authorization):
     url = 'https://xbk.189.cn/xbkapi/active/v2/lottery/do'
     headers = {
         'x-xsrf-token': 'eyJpdiI6InVzd2FYUWxWbjJ0TWg0eFIxanNOVUE9PSIsInZhbHVlIjoickNsMEhReEJtOFwvNWtvclJIVkdERWFrVUtvS2lxTTlMOWdxN0pGNXpIRXRVc0ZENXdCaWg3RHRqRTk4eldNVnoiLCJtYWMiOiI0YjY0Y2NiZjUwYzk1NWRmNjhmMGY5Y2E5NmYzZTczNDAwM2ZlNmVhOWY2ZmU0M2Q5ZTczZmQ2MzdiZjMyMDE5In0=',
-        "User-Agent": ua,
+        "User-Agent": 'CtClient;10.0.0;Android;10;ASK-AL00x;MzkyMjMw!#!MTMzMTU',
         "authorization": authorization,
-
     }
+    print(liveId,period)
     da = {"active_code":"20210430YmBxyGy78LRnLCVDf3","liveId":liveId,"period":period}
     redict = requests.post(url, headers=headers, data=da).json()
     try:
@@ -213,6 +213,8 @@ def main(phone, password):
     chinaTelecom.author()
     authorization = chinaTelecom.authorization
     ua = chinaTelecom.ua
+    print(ua)
+    print(authorization)
     allLiveInfo = []
     for i in range(0,35):
         i = '{:0>2d}'.format(i)
@@ -234,7 +236,7 @@ def main(phone, password):
     print(allLiveInfo)
     for liveInfo in allLiveInfo:
         if liveInfo["liveStatus"] == "reser":
-            ref(liveInfo["liveId"],liveInfo["period"],ua,authorization)
+            ref(liveInfo["liveId"],liveInfo["period"],ua,authorization,phone)
             time.sleep(5)
             reward(liveInfo["liveId"],liveInfo["period"],ua,authorization)
             time.sleep(5)
@@ -254,9 +256,10 @@ def main(phone, password):
         TelecomLotter(phone, password).find_price()
 
 if __name__ == '__main__':
-    phone = get_environ("TELECOM_PHONE")
-    password = get_environ("TELECOM_PASSWORD")
-
+    #phone = get_environ("TELECOM_PHONE")
+    #password = get_environ("TELECOM_PASSWORD")
+    phone = '13315392230'
+    password = '124213'
     if phone == "" or password == "":
         print("未填写相应变量 退出")
         exit(0)

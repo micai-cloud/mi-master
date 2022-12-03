@@ -2,7 +2,7 @@ name: xuexi
 on:
   workflow_dispatch:
     schedule:
-      - cron: '0 */1 * * *'
+      - cron: '0 */8 * * *'
 
     watch:
       types: [ started ]
@@ -11,7 +11,7 @@ jobs:
        runs-on: windows-latest
        steps:
           - uses: actions/checkout@v2
-          
+
           - name: Set up Python 3.7
             uses: actions/setup-python@v2
             with:
@@ -22,8 +22,8 @@ jobs:
             run: pip install pycryptodome
           - name: install requests
             run: pip install requests
-          - name: telecom_live_lotter
-            run: python telecom_live_lotter.py
+          - name: china_telecombak
+            run: python china_telecombak.py
             env:
-              TELECOM_PHONE: ${{ secrets.TELECOM_PHONE }}
-              TELECOM_PASSWORD: ${{ secrets.TELECOM_PASSWORD }}
+              TELECOM_PHONE1: ${{ secrets.TELECOM_PHONE1 }}
+              TELECOM_PASSWORD1: ${{ secrets.TELECOM_PASSWORD1 }}
