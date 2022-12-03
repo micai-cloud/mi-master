@@ -57,8 +57,9 @@ class China_Unicom:
         return round(time() * 1000)
 
     def print_now(self, content):
-        print(content)
-        stdout.flush()
+        #print(content)
+        #stdout.flush()
+        pass
 
     def md5(self, str):
         m = md5Encode(str.encode(encoding='utf-8'))
@@ -172,7 +173,7 @@ class China_Unicom:
         date = datetime.today().__format__("%Y%m%d%H%M%S")
         crypt_text = f'{{"ticketValue":"300","activeid":"61yd210901","timestamp":"{date}","token":"{self.userinfo["token"]}","userId":"{self.userinfo["userid"]}","userIndex":{self.userinfo["userindex"]},"userAccount":"{self.userinfo["phone"]}","verifyCode":"{self.userinfo["verifycode"]}"}}'
         data = self.req(url, crypt_text)
-        print(data)
+        #print(data)
 
     def query_red(self):
         url = "https://10010.woread.com.cn/ng_woread_service/rest/phone/vouchers/queryTicketAccount"
