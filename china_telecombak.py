@@ -202,7 +202,7 @@ class ChinaTelecom:
             try:
                 data = self.req(url, "post", body)
             except Exception as e:
-                print(f"请求发送失败: " + str(e))
+                #print(f"请求发送失败: " + str(e))
                 sleep(6)
                 continue
             print_now(data)
