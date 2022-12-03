@@ -133,7 +133,8 @@ class TelecomLotter:
             await sleep(90)
             continue
         if active_code1 is None and active_code2 is None:
-            print("查询结束 本直播间暂无抽奖活动")
+            #print("查询结束 本直播间暂无抽奖活动")
+            print('wu')
             return
         elif active_code1 is None or active_code2 is None:
             active_code = active_code1 if active_code2 is None else active_code2
@@ -152,7 +153,7 @@ class TelecomLotter:
                 "authorization": self.authorization
             }
             data = post(url, headers=headers, json=body).json()
-            print(data)
+            #print(data)
             time_sleep(10)
             if data["code"] == 0:
                 push("直播抽奖", f"{self.phone}: 获得了{data['data']['title']}")
@@ -192,7 +193,7 @@ def ref(liveId, period,ua,authorization,phone):
 
     }
     da = {"liveId": liveId, "period": period, "account": phone, "khd": 1}
-    print(requests.post(url, headers=headers, data=da).text)
+    #print(requests.post(url, headers=headers, data=da).text)
 def reward(liveId,period,ua,authorization):
     url = 'https://xbk.189.cn/xbkapi/active/v2/lottery/do'
     headers = {
@@ -200,13 +201,15 @@ def reward(liveId,period,ua,authorization):
         "User-Agent": 'CtClient;10.0.0;Android;10;ASK-AL00x;MzkyMjMw!#!MTMzMTU',
         "authorization": authorization,
     }
-    print(liveId,period)
+    #print(liveId,period)
     da = {"active_code":"20210430YmBxyGy78LRnLCVDf3","liveId":liveId,"period":period}
     redict = requests.post(url, headers=headers, data=da).json()
     try:
-        print(redict['msg'] + redict['data']['prize_id'])
+        print(11)
+        #print(redict['msg'] + redict['data']['prize_id'])
     except:
-        print(redict)
+        #print(redict)
+        print(2)
 def main(phone, password):
     chinaTelecom = ChinaTelecom(phone, password)
     chinaTelecom.init()
@@ -233,7 +236,7 @@ def main(phone, password):
         data = get(url, headers=headers).json()
         apiType = 2'''
     liveListInfo = {}
-    print(allLiveInfo)
+    #print(allLiveInfo)
     for liveInfo in allLiveInfo:
         if liveInfo["liveStatus"] == "reser":
             ref(liveInfo["liveId"],liveInfo["period"],ua,authorization,phone)
@@ -246,7 +249,8 @@ def main(phone, password):
         if liveInfo["liveStatus"] == "living":
             liveListInfo[liveInfo["liveId"]] = liveInfo["period"]
     if len(liveListInfo) == 0:
-        print("查询结束 没有近期开播的直播间")
+        #print("查询结束 没有近期开播的直播间")
+        print(0)
     else:
         telecomLotter = TelecomLotter(phone, password)
         all_task = [telecomLotter.lotter(liveId, period) for liveId, period in liveListInfo.items()]
