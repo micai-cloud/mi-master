@@ -261,8 +261,8 @@ def main(phone, password):
         TelecomLotter(phone, password).find_price()
 
 if __name__ == '__main__':
-    phone = get_environ("TELECOM_PHONE")
-    password = get_environ("TELECOM_PASSWORD")
+    phone = get_environ("TELECOM_PHONE1")
+    password = get_environ("TELECOM_PASSWORD1")
     #phone = ''
     #password = ''
     if phone == "" or password == "":

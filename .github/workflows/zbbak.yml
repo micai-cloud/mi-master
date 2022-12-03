@@ -1,0 +1,29 @@
+name: zbbak
+on:
+  workflow_dispatch:
+    schedule:
+      - cron: '0 */1 * * *'
+
+    watch:
+      types: [ started ]
+jobs:
+   build:
+       runs-on: windows-latest
+       steps:
+          - uses: actions/checkout@v2
+
+          - name: Set up Python 3.7
+            uses: actions/setup-python@v2
+            with:
+                python-version: 3.7
+          - name: install pip packages
+            run: python -m pip install --upgrade pip
+          - name: install pycryptodome
+            run: pip install pycryptodome
+          - name: install requests
+            run: pip install requests
+          - name: telecom_live_lotterbak
+            run: python telecom_live_lotterbak.py
+            env:
+              TELECOM_PHONE1: ${{ secrets.TELECOM_PHONE1 }}
+              TELECOM_PASSWORD1: ${{ secrets.TELECOM_PASSWORD1 }}
