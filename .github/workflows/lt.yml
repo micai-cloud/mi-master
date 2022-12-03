@@ -1,11 +1,11 @@
 name: lt
 on:
   workflow_dispatch:
-    schedule:
-      - cron: '0 */8 * * *'
+  schedule:
+    - cron: '0 */8 * * *'
 
-    watch:
-      types: [ started ]
+  watch:
+    types: [ started ]
 jobs:
    build:
        runs-on: windows-latest
