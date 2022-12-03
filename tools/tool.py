@@ -32,8 +32,9 @@ def uuid(num, upper=False):
 
 # 修改print方法 避免某些环境下python执行print 不会去刷新缓存区导致信息第一时间不及时输出
 def print_now(content):
-    print(content)
-    stdout.flush()
+    #print(content)
+    #stdout.flush()
+    pass
 
 
 def get_ua():
