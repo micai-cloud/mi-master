@@ -68,7 +68,7 @@ class TelecomLotter:
         data = post(url, headers=headers, json=body).json()
         try:
             for waresInfo in data["responseData"]["data"]["waresInfos"]:
-                print(waresInfo["title"])
+                #print(waresInfo["title"])
                 if "转盘" in waresInfo["title"] or "抽奖" in waresInfo["title"]:
                     active_code = findall(r"active_code\u003d(.*?)\u0026", waresInfo["link"])[0]
                     return active_code
@@ -121,7 +121,7 @@ class TelecomLotter:
         :param period: 某个参数 暂不明意义 查询直播间信息时会返回
         :return:
         """
-        print_now(f"当前执行的直播间id为{liveId}")
+        #print_now(f"当前执行的直播间id为{liveId}")
         for i in range(8):
             # active_code1 查询直播间购物车中的大转盘活动id
             active_code1 = self.get_action_id(liveId)
@@ -171,10 +171,11 @@ class TelecomLotter:
             compare_date = lambda date: date.split("-")[1] == str((datetime.now() + timedelta(hours=8 - int(strftime("%z")[2]))).month)
             month_price = [f'{info["win_time"]}: {info["title"]}' for info in all_price_list if compare_date(info["win_time"])]
             month_price_info = "\n".join(month_price)
-            print(month_price_info)
+            #print(month_price_info)
             push("本月直播奖品查询", f"{self.phone}:\n{month_price_info}")
         else:
-            print(f"获取奖品信息失败, 接口返回" + str(data))
+            #print(f"获取奖品信息失败, 接口返回" + str(data))
+            print(0000)
 def  attainlive(i):
     url = "https://xbk.189.cn/xbkapi/lteration/index/recommend/anchorRecommend?provinceCode=" + i
     random_phone = f"1537266{randint(1000, 9999)}"
@@ -217,8 +218,8 @@ def main(phone, password):
     chinaTelecom.author()
     authorization = chinaTelecom.authorization
     ua = chinaTelecom.ua
-    print(ua)
-    print(authorization)
+    #print(ua)
+    #print(authorization)
     allLiveInfo = []
     for i in range(0,35):
         i = '{:0>2d}'.format(i)
