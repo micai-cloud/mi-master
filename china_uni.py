@@ -57,8 +57,9 @@ class China_Unicom:
         return round(time() * 1000)
 
     def print_now(self, content):
-        print(content)
-        stdout.flush()
+        #print(content)
+        #stdout.flush()
+        pass
 
     def md5(self, str):
         m = md5Encode(str.encode(encoding='utf-8'))
