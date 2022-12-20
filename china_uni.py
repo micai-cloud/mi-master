@@ -214,4 +214,3 @@ if __name__ == "__main__":
     if phone_num == "":
         exit(0)
     China_Unicom(phone_num).main()
-#phone_num = '13173218252'
